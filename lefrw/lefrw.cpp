@@ -2196,7 +2196,7 @@ void freeCB(void* name) {
 }
 
 void lineNumberCB(int lineNo) {
-  fprintf(fout, "Parsed %d number of lines!!\n", lineNo);
+  //fprintf(fout, "Parsed %d number of lines!!\n", lineNo);
   return;
 }
 
