@@ -153,7 +153,7 @@ void lefVia(lefiVia *via) {
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 } else {
-                    fprintf(fout, "    RECT ( %f %f ) ( %f %f ) ;\n",
+                    fprintf(fout, "    RECT %f %f %f %f ;\n",
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 }
@@ -240,7 +240,7 @@ void lefViaRuleLayer(lefiViaRuleLayer* vLayer) {
              vLayer->lefiViaRuleLayer::spacingStepX(),
              vLayer->lefiViaRuleLayer::spacingStepY());
   if (vLayer->lefiViaRuleLayer::hasRect())
-     fprintf(fout, "    RECT ( %f %f ) ( %f %f ) ;\n",
+     fprintf(fout, "    RECT %f %f %f %f ;\n",
              vLayer->lefiViaRuleLayer::xl(), vLayer->lefiViaRuleLayer::yl(),
              vLayer->lefiViaRuleLayer::xh(), vLayer->lefiViaRuleLayer::yh());
   return;
@@ -317,7 +317,7 @@ void prtGeometry(lefiGeometries *geometry) {
                         rect->colorMask, rect->xl,
                         rect->yl, rect->xh, rect->yh);
             } else {
-                fprintf(fout, "      RECT ( %f %f ) ( %f %f ) ;\n", rect->xl,
+                fprintf(fout, "      RECT %f %f %f %f ;\n", rect->xl,
                         rect->yl, rect->xh, rect->yh);
             }
             break;
@@ -1406,7 +1406,7 @@ int macroCB(lefrCallbackType_e c, lefiMacro* macro, lefiUserData ud) {
      }
   }
   if (macro->lefiMacro::hasOrigin())
-     fprintf(fout, "  ORIGIN ( %g %g ) ;\n", macro->lefiMacro::originX(),
+     fprintf(fout, "  ORIGIN %g %g ;\n", macro->lefiMacro::originX(),
              macro->lefiMacro::originY());
   if (macro->lefiMacro::hasPower())
      fprintf(fout, "  POWER %g ;\n", macro->lefiMacro::power());
