@@ -47,6 +47,12 @@
 #include "lefiEncryptInt.hpp"
 #include "lefiUtil.hpp"
 
+#define FP "%.6f"
+#define POINT FP " " FP
+#define IN0 "  "
+#define IN1 "    "
+#define IN2 "      "
+
 char defaultName[128];
 char defaultOut[128];
 FILE* fout;
@@ -148,12 +154,12 @@ void lefVia(lefiVia *via) {
             fprintf(fout, "  LAYER %s\n", via->lefiVia::layerName(i));
             for (j = 0; j < via->lefiVia::numRects(i); j++)
                 if (via->lefiVia::rectColorMask(i, j)) {
-                    fprintf(fout, "    RECT MASK %d ( %f %f ) ( %f %f ) ;\n",
+                    fprintf(fout, "    RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
                             via->lefiVia::rectColorMask(i, j),
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 } else {
-                    fprintf(fout, "    RECT %f %f %f %f ;\n",
+                    fprintf(fout, "    RECT " FP " " FP " " FP " " FP " ;\n",
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 }
@@ -240,7 +246,7 @@ void lefViaRuleLayer(lefiViaRuleLayer* vLayer) {
              vLayer->lefiViaRuleLayer::spacingStepX(),
              vLayer->lefiViaRuleLayer::spacingStepY());
   if (vLayer->lefiViaRuleLayer::hasRect())
-     fprintf(fout, "    RECT %f %f %f %f ;\n",
+     fprintf(fout, "    RECT " FP " " FP " " FP " " FP " ;\n",
              vLayer->lefiViaRuleLayer::xl(), vLayer->lefiViaRuleLayer::yl(),
              vLayer->lefiViaRuleLayer::xh(), vLayer->lefiViaRuleLayer::yh());
   return;
@@ -313,22 +319,22 @@ void prtGeometry(lefiGeometries *geometry) {
         case lefiGeomRectE:
             rect = geometry->lefiGeometries::getRect(i);
             if (rect->colorMask != 0) {
-                fprintf(fout, "      RECT MASK %d ( %f %f ) ( %f %f ) ;\n",
+                fprintf(fout, "      RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
                         rect->colorMask, rect->xl,
                         rect->yl, rect->xh, rect->yh);
             } else {
-                fprintf(fout, "      RECT %f %f %f %f ;\n", rect->xl,
+                fprintf(fout, "      RECT " FP " " FP " " FP " " FP " ;\n", rect->xl,
                         rect->yl, rect->xh, rect->yh);
             }
             break;
         case lefiGeomRectIterE:
             rectIter = geometry->lefiGeometries::getRectIter(i);
             if (rectIter->colorMask != 0) {
-                fprintf(fout, "      RECT MASK %d ITERATE ( %f %f ) ( %f %f )\n",
+                fprintf(fout, "      RECT MASK %d ITERATE ( " FP " " FP " ) ( " FP " " FP " )\n",
                         rectIter->colorMask,
                         rectIter->xl, rectIter->yl, rectIter->xh, rectIter->yh);
             } else {
-                fprintf(fout, "      RECT ITERATE ( %f %f ) ( %f %f )\n",
+                fprintf(fout, "      RECT ITERATE ( " FP " " FP " ) ( " FP " " FP " )\n",
                         rectIter->xl, rectIter->yl, rectIter->xh, rectIter->yh);
             }
             fprintf(fout, "      DO %g BY %g STEP %g %g ;\n",
