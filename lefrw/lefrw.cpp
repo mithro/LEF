@@ -52,6 +52,7 @@
 #define IN0 "  "
 #define IN1 "    "
 #define IN2 "      "
+#define IN3 "        "
 
 char defaultName[128];
 char defaultOut[128];
@@ -154,12 +155,12 @@ void lefVia(lefiVia *via) {
             fprintf(fout, IN0 "LAYER %s\n", via->lefiVia::layerName(i));
             for (j = 0; j < via->lefiVia::numRects(i); j++)
                 if (via->lefiVia::rectColorMask(i, j)) {
-                    fprintf(fout, IN2 "RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
+                    fprintf(fout, IN3 "RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
                             via->lefiVia::rectColorMask(i, j),
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 } else {
-                    fprintf(fout, IN2 "RECT " FP " " FP " " FP " " FP " ;\n",
+                    fprintf(fout, IN3 "RECT " FP " " FP " " FP " " FP " ;\n",
                             via->lefiVia::xl(i, j), via->lefiVia::yl(i, j),
                             via->lefiVia::xh(i, j), via->lefiVia::yh(i, j));
                 }
@@ -167,9 +168,9 @@ void lefVia(lefiVia *via) {
                 struct lefiGeomPolygon poly;
                 poly = via->lefiVia::getPolygon(i, j);
                 if (via->lefiVia::polyColorMask(i, j)) {
-                    fprintf(fout, IN2 "POLYGON MASK %d", via->lefiVia::polyColorMask(i, j));
+                    fprintf(fout, IN3 "POLYGON MASK %d", via->lefiVia::polyColorMask(i, j));
                 } else {
-                    fprintf(fout, IN2 "POLYGON ");
+                    fprintf(fout, IN3 "POLYGON ");
                 }
                 for (int k = 0; k < poly.numPoints; k++)
                     fprintf(fout, " %g %g ", poly.x[k], poly.y[k]);
@@ -319,11 +320,11 @@ void prtGeometry(lefiGeometries *geometry) {
         case lefiGeomRectE:
             rect = geometry->lefiGeometries::getRect(i);
             if (rect->colorMask != 0) {
-                fprintf(fout, IN2 "RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
+                fprintf(fout, IN3 "RECT MASK %d ( " FP " " FP " ) ( " FP " " FP " ) ;\n",
                         rect->colorMask, rect->xl,
                         rect->yl, rect->xh, rect->yh);
             } else {
-                fprintf(fout, IN2 "RECT " FP " " FP " " FP " " FP " ;\n", rect->xl,
+                fprintf(fout, IN3 "RECT " FP " " FP " " FP " " FP " ;\n", rect->xl,
                         rect->yl, rect->xh, rect->yh);
             }
             break;
