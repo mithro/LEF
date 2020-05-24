@@ -2091,7 +2091,7 @@ int useMinSpacingCB(lefrCallbackType_e c, lefiUseMinSpacing* spacing,
 int versionCB(lefrCallbackType_e c, double num, lefiUserData ud) {
   checkType(c);
   // if ((long)ud != userData) dataError();
-  fprintf(fout, "VERSION " FP " ;\n", num);
+  fprintf(fout, "VERSION %.1f ;\n", num);
   return 0;
 }
 
